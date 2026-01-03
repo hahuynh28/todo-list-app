@@ -1,19 +1,30 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useAuth } from "@/context/AuthContext";
 
+// User menu dropdown shown in the header (avatar + logout)
 const UserMenu = () => {
+  // Get current user data and logout function from auth context
   const { user, logout } = useAuth();
+
+  // Controls whether the dropdown menu is open or closed
   const [open, setOpen] = useState(false);
+
+  // Reference to the menu container for detecting outside clicks
   const ref = useRef(null);
 
-  // đóng menu khi click ra ngoài
+  // Close the dropdown when clicking outside of the menu
   useEffect(() => {
     const handleClickOutside = (e) => {
+      // If the click is outside the menu container, close the dropdown
       if (ref.current && !ref.current.contains(e.target)) {
         setOpen(false);
       }
     };
+
+    // Listen for mouse clicks anywhere on the page
     document.addEventListener("mousedown", handleClickOutside);
+
+    // Cleanup the event listener when the component unmounts
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
