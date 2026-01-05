@@ -4,6 +4,7 @@ import HomePage from "./pages/HomePage";
 import NotFound from "./pages/NotFound";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Login from "./pages/Login.jsx";
+import Profile from "./pages/Profile.jsx";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
               // </ProtectedRoute>
             }
           />
+          <Route path="/profile" element={<Profile />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

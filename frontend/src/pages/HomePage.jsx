@@ -15,7 +15,8 @@ const HomePage = () => {
   const [taskBuffer, setTaskBuffer] = useState([]);
 
   // Task statistics (retrieved from backend)
-  const [activeTaskCount, setPendingTaskCount] = useState(0);
+  const [pendingTaskCount, setPendingTaskCount] = useState(0);
+
   const [completedTaskCount, setCompletedTaskCount] = useState(0);
 
   // Filter UI (frontend)
@@ -41,7 +42,7 @@ const HomePage = () => {
   // Get task list and statistics from backend
   const fetchTasks = async () => {
     try {
-      const res = await api.get(`/api/tasks?filter=${dateQuery}`);
+      const res = await api.get(`/tasks?filter=${dateQuery}`);
       setTaskBuffer(res.data.tasks);
       setPendingTaskCount(res.data.pendingCount);
       setCompletedTaskCount(res.data.completedCount);
@@ -120,7 +121,7 @@ const HomePage = () => {
           <StatsAndFilters
             filter={filter}
             setFilter={setFilter}
-            activeTasksCount={activeTaskCount}
+            pendingTaskCount={pendingTaskCount}
             completedTasksCount={completedTaskCount}
           />
           {/* List of tasks (filtered and paginated) */}
@@ -141,7 +142,7 @@ const HomePage = () => {
             <DateTimeFilter dateQuery={dateQuery} setDateQuery={setDateQuery} />
           </div>
           <Footer
-            activeTasksCount={activeTaskCount}
+            pendingTaskCount={pendingTaskCount}
             completedTasksCount={completedTaskCount}
           />
         </div>

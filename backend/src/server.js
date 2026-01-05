@@ -19,7 +19,7 @@ app.use(cors());
 app.use("/auth", authRoutes);
 
 // Register task routes
-app.use("/api/tasks", tasksRoutes);
+app.use("/tasks", tasksRoutes);
 
 // Connect to database before starting server
 connectDB().then(() => {

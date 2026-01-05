@@ -1,4 +1,5 @@
 import Task from "../models/Task.js";
+import mongoose from "mongoose";
 
 // Get tasks with time filter and return task list + statistics
 export const getAllTasks = async (req, res) => {
@@ -32,7 +33,7 @@ export const getAllTasks = async (req, res) => {
 
   // Build MongoDB query based on startDate
   const query = {
-    userId: req.userId,
+    userId: new mongoose.Types.ObjectId(req.userId),
     ...(startDate && { createdAt: { $gte: startDate } }),
   };
 
