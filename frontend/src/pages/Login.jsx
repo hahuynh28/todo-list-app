@@ -16,10 +16,8 @@ const Login = () => {
 
     try {
       const res = await api.post("/auth/login", { email, password });
-      console.log("LOGIN RESPONSE:", res.data);
 
       login(res.data.token, res.data.user);
-      console.log("LOGIN CALLED");
       navigate("/");
     } catch (err) {
       console.error("LOGIN ERROR:", err.response?.data || err.message);
